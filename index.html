@@ -110,6 +110,7 @@
   #audioVisualizer{width:100%;height:60px;background:#020617;border:1px solid var(--line);border-radius:10px}
   .info{font-size:12px;color:#64748b;font-weight:700}
   .tip{font-size:12px;color:var(--muted);line-height:1.5}
+  #audioStatus{font-size:12px;font-weight:600;color:var(--muted);line-height:1.4;min-height:17px}
 
   /* ---------- Hints ---------- */
   #rotateHint{position:fixed;left:50%;bottom:10px;transform:translateX(-50%);z-index:60;display:none;align-items:center;gap:8px;
@@ -218,8 +219,11 @@
       <span class="fl">Visualizer</span>
       <canvas id="audioVisualizer" width="300" height="60"></canvas>
     </div>
+    <button id="testSoundBtn" class="btn" style="width:100%"><i class="fa-solid fa-volume-high"></i> Test sound</button>
+    <div id="audioStatus"></div>
     <div class="info" id="bpmLabel">BPM 124</div>
     <p class="tip"><i class="fa-solid fa-hand-pointer"></i> Slide your finger across the keys to glide. Hold several keys at once for chords.</p>
+    <p class="tip"><i class="fa-solid fa-circle-info"></i> No sound on iPhone? Turn off silent mode (the side switch should not show orange). On Android, check the media volume.</p>
   </div>
 </aside>
 
@@ -322,6 +326,7 @@
   function initAudio() {
     if (!audioCtx) {
       const AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return;
       audioCtx = new AC();
       masterGain = audioCtx.createGain();
       masterGain.gain.value = 0.3;
@@ -331,11 +336,15 @@
       analyser.connect(audioCtx.destination);
       startVisualizer();
     }
-    if (audioCtx.state === 'suspended') audioCtx.resume();
+    // iOS can leave the context in 'suspended' or 'interrupted'; resume from any non-running state
+    if (audioCtx.state !== 'running') {
+      audioCtx.resume().catch(() => {});
+    }
   }
 
   function playNoteSound(note) {
     initAudio();
+    if (!audioCtx) return;
     try {
       const now = audioCtx.currentTime;
       const decay = parseFloat($('decaySlider').value) || 1.2;
@@ -371,6 +380,26 @@
         c.fillRect(i * bw, canvas.height - h, bw - 1, h);
       });
     })();
+  }
+
+  function testSound() {
+    initAudio();
+    playNoteSound('C4');
+    setTimeout(updateAudioStatus, 300);
+  }
+
+  function updateAudioStatus() {
+    const s = $('audioStatus');
+    if (!audioCtx) {
+      s.textContent = 'Audio has not started yet. Tap Test sound.';
+      s.style.color = '#94a3b8';
+    } else if (audioCtx.state === 'running') {
+      s.textContent = 'Audio engine is running. If you still hear nothing, check silent mode or the volume.';
+      s.style.color = '#34d399';
+    } else {
+      s.textContent = 'Audio is blocked. Tap Test sound again, and check silent mode.';
+      s.style.color = '#fbbf24';
+    }
   }
 
   // ---------- Rendering ----------
@@ -744,12 +773,20 @@
     $('filterDrumsToggle').addEventListener('change', () => { if (activeRawMidi) processMidiData(activeRawMidi); });
 
     $('midiFileInput').addEventListener('change', onMidiFile);
+    $('testSoundBtn').addEventListener('click', testSound);
 
     setupKeyboardTouch();
 
-    // Pause if the app goes to the background; keep the screen awake while playing
+    // iOS needs audio unlocked by a user gesture. Unlock on the first touch anywhere on the page.
+    document.addEventListener('pointerdown', initAudio, true);
+
+    // Pause if the app goes to the background. When it returns, resume audio if iOS interrupted it.
     document.addEventListener('visibilitychange', () => {
-      if (document.hidden) stopPractice();
+      if (document.hidden) {
+        stopPractice();
+      } else if (audioCtx && audioCtx.state !== 'running') {
+        audioCtx.resume().catch(() => {});
+      }
     });
     document.addEventListener('gesturestart', e => e.preventDefault());
   }
