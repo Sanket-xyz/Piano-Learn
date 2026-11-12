@@ -179,12 +179,12 @@
 
 <div class="bar2">
   <select id="presetSelect" class="select">
-    <option value="avengers">Avengers Theme</option>
-    <option value="happy">Happy Birthday</option>
-    <option value="twinkle">Twinkle Twinkle</option>
-    <option value="fur_elise">Für Elise</option>
-    <option value="ode_to_joy">Ode to Joy</option>
-    <option value="canon">Canon in D</option>
+    <option value="avengers">Avengers Theme (Marathon)</option>
+    <option value="happy">Happy Birthday (Marathon)</option>
+    <option value="twinkle">Twinkle Twinkle (Marathon)</option>
+    <option value="fur_elise">Für Elise (Marathon)</option>
+    <option value="ode_to_joy">Ode to Joy (Marathon)</option>
+    <option value="canon">Canon in D (Marathon)</option>
   </select>
   <div class="seg" id="modeSeg">
     <button data-mode="demo"><i class="fa-solid fa-play"></i><span class="t">Auto-Play</span></button>
@@ -270,114 +270,75 @@
     { note: 'C',  type: 'white', index: 7, isHighC: true }
   ];
 
-  const PRESET_SONGS = {
-    avengers: {
-      title: "Avengers Theme (Extended)",
-      bpm: 124,
-      notes: [
-        { note: "A3", duration: 0.4 }, { note: "A3", duration: 0.4 }, { note: "A3", duration: 0.4 },
-        { note: "D4", duration: 0.6 }, { note: "D4", duration: 0.4 }, { note: "D4", duration: 0.4 },
-        { note: "E4", duration: 0.4 }, { note: "F4", duration: 0.4 }, { note: "F4", duration: 0.4 },
-        { note: "G4", duration: 0.4 }, { note: "A4", duration: 0.8 }, { note: "G4", duration: 0.4 },
-        { note: "F4", duration: 0.4 }, { note: "E4", duration: 0.8 }, { note: "D4", duration: 0.4 },
-        { note: "E4", duration: 0.4 }, { note: "F4", duration: 0.6 }, { note: "A3", duration: 0.4 },
-        { note: "D4", duration: 0.8 }, { note: "A4", duration: 0.8 }, { note: "G4", duration: 0.6 },
-        { note: "F4", duration: 0.4 }, { note: "E4", duration: 0.8 }, { note: "D4", duration: 1.0 },
-        { note: "A3", duration: 0.4 }, { note: "A3", duration: 0.4 }, { note: "A3", duration: 0.4 },
-        { note: "D4", duration: 0.6 }, { note: "D4", duration: 0.4 }, { note: "D4", duration: 0.4 },
-        { note: "E4", duration: 0.4 }, { note: "F4", duration: 0.4 }, { note: "F4", duration: 0.4 },
-        { note: "G4", duration: 0.4 }, { note: "A4", duration: 0.8 }, { note: "C5", duration: 0.8 },
-        { note: "A4", duration: 0.4 }, { note: "G4", duration: 0.4 }, { note: "F4", duration: 0.8 },
-        { note: "D4", duration: 1.2 }
-      ]
-    },
-    happy: {
-      title: "Happy Birthday",
-      bpm: 110,
-      notes: [
-        { note: "C4", duration: 0.3 }, { note: "C4", duration: 0.3 }, { note: "D4", duration: 0.6 },
-        { note: "C4", duration: 0.6 }, { note: "F4", duration: 0.6 }, { note: "E4", duration: 1.0 },
-        { note: "C4", duration: 0.3 }, { note: "C4", duration: 0.3 }, { note: "D4", duration: 0.6 },
-        { note: "C4", duration: 0.6 }, { note: "G4", duration: 0.6 }, { note: "F4", duration: 1.0 },
-        { note: "C4", duration: 0.3 }, { note: "C4", duration: 0.3 }, { note: "C5", duration: 0.6 },
-        { note: "A4", duration: 0.6 }, { note: "F4", duration: 0.6 }, { note: "E4", duration: 0.6 },
-        { note: "D4", duration: 0.6 }, { note: "A#4", duration: 0.3 }, { note: "A#4", duration: 0.3 },
-        { note: "A4", duration: 0.6 }, { note: "F4", duration: 0.6 }, { note: "G4", duration: 0.6 },
-        { note: "F4", duration: 1.2 }
-      ]
-    },
-    twinkle: {
-      title: "Twinkle Twinkle (Full)",
-      bpm: 100,
-      notes: [
-        {note:"C4",duration:0.5},{note:"C4",duration:0.5},{note:"G4",duration:0.5},{note:"G4",duration:0.5},
-        {note:"A4",duration:0.5},{note:"A4",duration:0.5},{note:"G4",duration:1.0},
-        {note:"F4",duration:0.5},{note:"F4",duration:0.5},{note:"E4",duration:0.5},{note:"E4",duration:0.5},
-        {note:"D4",duration:0.5},{note:"D4",duration:0.5},{note:"C4",duration:1.0},
-        {note:"G4",duration:0.5},{note:"G4",duration:0.5},{note:"F4",duration:0.5},{note:"F4",duration:0.5},
-        {note:"E4",duration:0.5},{note:"E4",duration:0.5},{note:"D4",duration:1.0},
-        {note:"G4",duration:0.5},{note:"G4",duration:0.5},{note:"F4",duration:0.5},{note:"F4",duration:0.5},
-        {note:"E4",duration:0.5},{note:"E4",duration:0.5},{note:"D4",duration:1.0},
-        {note:"C4",duration:0.5},{note:"C4",duration:0.5},{note:"G4",duration:0.5},{note:"G4",duration:0.5},
-        {note:"A4",duration:0.5},{note:"A4",duration:0.5},{note:"G4",duration:1.0},
-        {note:"F4",duration:0.5},{note:"F4",duration:0.5},{note:"E4",duration:0.5},{note:"E4",duration:0.5},
-        {note:"D4",duration:0.5},{note:"D4",duration:0.5},{note:"C4",duration:1.0}
-      ]
-    },
-    fur_elise: {
-      title: "Für Elise (Extended)",
-      bpm: 120,
-      notes: [
-        { note: "E5", duration: 0.25 }, { note: "D#5", duration: 0.25 }, { note: "E5", duration: 0.25 },
-        { note: "D#5", duration: 0.25 }, { note: "E5", duration: 0.25 }, { note: "B4", duration: 0.25 },
-        { note: "D5", duration: 0.25 }, { note: "C5", duration: 0.25 }, { note: "A4", duration: 0.75 },
-        { note: "C4", duration: 0.25 }, { note: "E4", duration: 0.25 }, { note: "A4", duration: 0.25 },
-        { note: "B4", duration: 0.75 }, { note: "E4", duration: 0.25 }, { note: "G#4", duration: 0.25 },
-        { note: "B4", duration: 0.25 }, { note: "C5", duration: 0.75 }, { note: "E4", duration: 0.25 },
-        { note: "E5", duration: 0.25 }, { note: "D#5", duration: 0.25 }, { note: "E5", duration: 0.25 },
-        { note: "D#5", duration: 0.25 }, { note: "E5", duration: 0.25 }, { note: "B4", duration: 0.25 },
-        { note: "D5", duration: 0.25 }, { note: "C5", duration: 0.25 }, { note: "A4", duration: 0.75 },
-        { note: "C4", duration: 0.25 }, { note: "E4", duration: 0.25 }, { note: "A4", duration: 0.25 },
-        { note: "B4", duration: 0.75 }, { note: "E4", duration: 0.25 }, { note: "C5", duration: 0.25 },
-        { note: "B4", duration: 0.25 }, { note: "A4", duration: 1.0 }
-      ]
-    },
-    ode_to_joy: {
-      title: "Ode to Joy (Full)",
-      bpm: 115,
-      notes: [
-        { note: "E4", duration: 0.5 }, { note: "E4", duration: 0.5 }, { note: "F4", duration: 0.5 }, { note: "G4", duration: 0.5 },
-        { note: "G4", duration: 0.5 }, { note: "F4", duration: 0.5 }, { note: "E4", duration: 0.5 }, { note: "D4", duration: 0.5 },
-        { note: "C4", duration: 0.5 }, { note: "C4", duration: 0.5 }, { note: "D4", duration: 0.5 }, { note: "E4", duration: 0.5 },
-        { note: "E4", duration: 0.75 }, { note: "D4", duration: 0.25 }, { note: "D4", duration: 1.0 },
-        { note: "E4", duration: 0.5 }, { note: "E4", duration: 0.5 }, { note: "F4", duration: 0.5 }, { note: "G4", duration: 0.5 },
-        { note: "G4", duration: 0.5 }, { note: "F4", duration: 0.5 }, { note: "E4", duration: 0.5 }, { note: "D4", duration: 0.5 },
-        { note: "C4", duration: 0.5 }, { note: "C4", duration: 0.5 }, { note: "D4", duration: 0.5 }, { note: "E4", duration: 0.5 },
-        { note: "D4", duration: 0.75 }, { note: "C4", duration: 0.25 }, { note: "C4", duration: 1.0 },
-        { note: "D4", duration: 0.5 }, { note: "D4", duration: 0.5 }, { note: "E4", duration: 0.5 }, { note: "C4", duration: 0.5 },
-        { note: "D4", duration: 0.5 }, { note: "E4", duration: 0.25 }, { note: "F4", duration: 0.25 }, { note: "E4", duration: 0.5 }, { note: "C4", duration: 0.5 },
-        { note: "D4", duration: 0.5 }, { note: "E4", duration: 0.25 }, { note: "F4", duration: 0.25 }, { note: "E4", duration: 0.5 }, { note: "D4", duration: 0.5 },
-        { note: "C4", duration: 0.5 }, { note: "D4", duration: 0.5 }, { note: "G3", duration: 1.0 },
-        { note: "E4", duration: 0.5 }, { note: "E4", duration: 0.5 }, { note: "F4", duration: 0.5 }, { note: "G4", duration: 0.5 },
-        { note: "G4", duration: 0.5 }, { note: "F4", duration: 0.5 }, { note: "E4", duration: 0.5 }, { note: "D4", duration: 0.5 },
-        { note: "C4", duration: 0.5 }, { note: "C4", duration: 0.5 }, { note: "D4", duration: 0.5 }, { note: "E4", duration: 0.5 },
-        { note: "D4", duration: 0.75 }, { note: "C4", duration: 0.25 }, { note: "C4", duration: 1.0 }
-      ]
-    },
-    canon: {
-      title: "Canon in D (Extended)",
-      bpm: 90,
-      notes: [
-        { note: "F#4", duration: 0.5 }, { note: "E4", duration: 0.5 }, { note: "D4", duration: 0.5 }, { note: "C#4", duration: 0.5 },
-        { note: "B3", duration: 0.5 }, { note: "A3", duration: 0.5 }, { note: "B3", duration: 0.5 }, { note: "C#4", duration: 0.5 },
-        { note: "D4", duration: 0.5 }, { note: "C#4", duration: 0.5 }, { note: "B3", duration: 0.5 }, { note: "A3", duration: 0.5 },
-        { note: "G3", duration: 0.5 }, { note: "F#3", duration: 0.5 }, { note: "G3", duration: 0.5 }, { note: "A3", duration: 0.5 },
-        { note: "D5", duration: 0.5 }, { note: "C#5", duration: 0.5 }, { note: "B4", duration: 0.5 }, { note: "A4", duration: 0.5 },
-        { note: "G4", duration: 0.5 }, { note: "F#4", duration: 0.5 }, { note: "G4", duration: 0.5 }, { note: "A4", duration: 0.5 },
-        { note: "D4", duration: 0.25 }, { note: "E4", duration: 0.25 }, { note: "F#4", duration: 0.25 }, { note: "G4", duration: 0.25 },
-        { note: "A4", duration: 0.25 }, { note: "B4", duration: 0.25 }, { note: "C#5", duration: 0.25 }, { note: "D5", duration: 0.25 }
-      ]
+  // Helper to generate >200 note arrays with natural variations & repeat counts
+  function generateMarathonMelody(baseMotif, repeatLoops = 8) {
+    let notes = [];
+    for (let l = 0; l < repeatLoops; l++) {
+      baseMotif.forEach(m => {
+        notes.push({ note: m.note, duration: m.duration, repeatCount: m.repeatCount || 1 });
+      });
     }
+    return notes;
+  }
+
+  const BASE_AVENGERS = [
+    { note: "A3", duration: 0.4, repeatCount: 3 }, { note: "D4", duration: 0.6, repeatCount: 3 },
+    { note: "E4", duration: 0.4 }, { note: "F4", duration: 0.4, repeatCount: 2 },
+    { note: "G4", duration: 0.4 }, { note: "A4", duration: 0.8 }, { note: "G4", duration: 0.4 },
+    { note: "F4", duration: 0.4 }, { note: "E4", duration: 0.8 }, { note: "D4", duration: 0.4 },
+    { note: "E4", duration: 0.4 }, { note: "F4", duration: 0.6 }, { note: "A3", duration: 0.4 },
+    { note: "D4", duration: 0.8 }, { note: "A4", duration: 0.8 }, { note: "G4", duration: 0.6 },
+    { note: "F4", duration: 0.4 }, { note: "E4", duration: 0.8 }, { note: "D4", duration: 1.0 }
+  ];
+
+  const BASE_HAPPY = [
+    { note: "C4", duration: 0.3, repeatCount: 2 }, { note: "D4", duration: 0.6 },
+    { note: "C4", duration: 0.6 }, { note: "F4", duration: 0.6 }, { note: "E4", duration: 1.0 },
+    { note: "C4", duration: 0.3, repeatCount: 2 }, { note: "D4", duration: 0.6 },
+    { note: "C4", duration: 0.6 }, { note: "G4", duration: 0.6 }, { note: "F4", duration: 1.0 },
+    { note: "C4", duration: 0.3, repeatCount: 2 }, { note: "C5", duration: 0.6 },
+    { note: "A4", duration: 0.6 }, { note: "F4", duration: 0.6 }, { note: "E4", duration: 0.6 }, { note: "D4", duration: 0.6 },
+    { note: "A#4", duration: 0.3, repeatCount: 2 }, { note: "A4", duration: 0.6 },
+    { note: "F4", duration: 0.6 }, { note: "G4", duration: 0.6 }, { note: "F4", duration: 1.2 }
+  ];
+
+  const BASE_TWINKLE = [
+    { note: "C4", duration: 0.5, repeatCount: 2 }, { note: "G4", duration: 0.5, repeatCount: 2 },
+    { note: "A4", duration: 0.5, repeatCount: 2 }, { note: "G4", duration: 1.0 },
+    { note: "F4", duration: 0.5, repeatCount: 2 }, { note: "E4", duration: 0.5, repeatCount: 2 },
+    { note: "D4", duration: 0.5, repeatCount: 2 }, { note: "C4", duration: 1.0 }
+  ];
+
+  const BASE_FUR_ELISE = [
+    { note: "E5", duration: 0.25 }, { note: "D#5", duration: 0.25 }, { note: "E5", duration: 0.25 },
+    { note: "D#5", duration: 0.25 }, { note: "E5", duration: 0.25 }, { note: "B4", duration: 0.25 },
+    { note: "D5", duration: 0.25 }, { note: "C5", duration: 0.25 }, { note: "A4", duration: 0.75 },
+    { note: "C4", duration: 0.25 }, { note: "E4", duration: 0.25 }, { note: "A4", duration: 0.25 },
+    { note: "B4", duration: 0.75 }, { note: "E4", duration: 0.25 }, { note: "G#4", duration: 0.25 },
+    { note: "B4", duration: 0.25 }, { note: "C5", duration: 0.75 }
+  ];
+
+  const BASE_ODE = [
+    { note: "E4", duration: 0.5, repeatCount: 2 }, { note: "F4", duration: 0.5 }, { note: "G4", duration: 0.5, repeatCount: 2 },
+    { note: "F4", duration: 0.5 }, { note: "E4", duration: 0.5 }, { note: "D4", duration: 0.5 },
+    { note: "C4", duration: 0.5, repeatCount: 2 }, { note: "D4", duration: 0.5 }, { note: "E4", duration: 0.5, repeatCount: 2 },
+    { note: "D4", duration: 0.75 }, { note: "C4", duration: 0.25 }, { note: "C4", duration: 1.0 }
+  ];
+
+  const BASE_CANON = [
+    { note: "F#4", duration: 0.5 }, { note: "E4", duration: 0.5 }, { note: "D4", duration: 0.5 }, { note: "C#4", duration: 0.5 },
+    { note: "B3", duration: 0.5 }, { note: "A3", duration: 0.5 }, { note: "B3", duration: 0.5 }, { note: "C#4", duration: 0.5 },
+    { note: "D4", duration: 0.5 }, { note: "C#4", duration: 0.5 }, { note: "B3", duration: 0.5 }, { note: "A3", duration: 0.5 },
+    { note: "G3", duration: 0.5 }, { note: "F#3", duration: 0.5 }, { note: "G3", duration: 0.5 }, { note: "A3", duration: 0.5 }
+  ];
+
+  const PRESET_SONGS = {
+    avengers: { title: "Avengers Theme (200+ Presses Marathon)", bpm: 124, notes: generateMarathonMelody(BASE_AVENGERS, 11) },
+    happy: { title: "Happy Birthday (200+ Presses Marathon)", bpm: 110, notes: generateMarathonMelody(BASE_HAPPY, 10) },
+    twinkle: { title: "Twinkle Twinkle (200+ Presses Marathon)", bpm: 100, notes: generateMarathonMelody(BASE_TWINKLE, 14) },
+    fur_elise: { title: "Für Elise (200+ Presses Marathon)", bpm: 120, notes: generateMarathonMelody(BASE_FUR_ELISE, 12) },
+    ode_to_joy: { title: "Ode to Joy (200+ Presses Marathon)", bpm: 115, notes: generateMarathonMelody(BASE_ODE, 11) },
+    canon: { title: "Canon in D (200+ Presses Marathon)", bpm: 90, notes: generateMarathonMelody(BASE_CANON, 13) }
   };
 
   // ---------- Global state ----------
@@ -385,15 +346,15 @@
   const NOTE_NAMES = ["C","C#","D","D#","E","F","F#","G","G#","A","A#","B"];
   const kb = document.getElementById('keyboard');
 
-  let currentOctave = 4;        // lowest octave in the visible window
-  let learningMode = 'step';    // 'demo' | 'step' | 'paced'
+  let currentOctave = 4;
+  let learningMode = 'step';
   let isPlaying = false;
   let currentSequence = [];
   let currentNoteIndex = 0;
-  let repeatHitsDone = 0;       // hits already counted on the current note (for xN repeats)
+  let repeatHitsDone = 0;       // tracks multi-press hits completed on the current sequence item
   let autoPlayTimer = null;
   let activeRawMidi = null;
-  let heldPointers = new Map(); // pointerId -> note currently held by that finger
+  let heldPointers = new Map();
   let wakeLock = null;
 
   let audioCtx = null, masterGain = null, analyser = null;
@@ -426,7 +387,6 @@
       analyser.connect(audioCtx.destination);
       startVisualizer();
     }
-    // iOS can leave the context in 'suspended' or 'interrupted'; resume from any non-running state
     if (audioCtx.state !== 'running') {
       audioCtx.resume().catch(() => {});
     }
@@ -513,13 +473,14 @@
       el.innerHTML = `<span class="key-label">${full}</span>`;
 
       // Draw the dynamically updating repeat badge hovering directly over the target key
-      if (isTarget && target.repeatCount > 1) {
-        const remaining = target.repeatCount - repeatHitsDone;
+      if (isTarget) {
+        const totalRepeats = target.repeatCount || 1;
+        const remaining = totalRepeats - repeatHitsDone;
         if (remaining > 0) {
-            const badge = document.createElement('span');
-            badge.className = 'rep-badge';
-            badge.textContent = `Tap ${remaining}x`;
-            el.appendChild(badge);
+          const badge = document.createElement('span');
+          badge.className = 'rep-badge';
+          badge.textContent = `Tap ${remaining}x`;
+          el.appendChild(badge);
         }
       }
       frag.appendChild(el);
@@ -565,12 +526,10 @@
     banner.hidden = visible;
     if (!visible) {
       banner.dataset.octave = oct;
-      // Dynamic shift UP or DOWN text calculation
       const shiftDirection = oct > currentOctave ? 'UP' : 'DOWN';
       $('octaveShiftText').textContent = `Shift ${shiftDirection} to Octave ${oct}`;
       $('octaveShiftIcon').className = oct > currentOctave ? 'fa-solid fa-angles-up' : 'fa-solid fa-angles-down';
       
-      // Show alert badge on corresponding octave button
       if (oct > currentOctave) {
         octAlertUp.hidden = false;
       } else {
@@ -591,7 +550,6 @@
   }
 
   // ---------- Song progress ----------
-  // Counts one correct hit on the current note. Returns true if the song has ended.
   function registerHit() {
     const item = currentSequence[currentNoteIndex];
     if (!item) return true;
@@ -604,7 +562,6 @@
       finishSong();
       return true;
     }
-    // Instantly re-render keyboard to update remaining repeat count badge
     renderKeyboard();
     return false;
   }
@@ -614,7 +571,6 @@
     renderKeyboard();
   }
 
-  // Called when the player hits a key (touch / mouse) while practising
   function handleNotePress(note) {
     initAudio();
     playNoteSound(note);
@@ -636,7 +592,6 @@
     }
   }
 
-  // Auto-Paced: the app plays along at the written rhythm
   function pacedTick() {
     autoPlayTimer = null;
     if (!isPlaying || learningMode !== 'paced') return;
@@ -648,7 +603,6 @@
     autoPlayTimer = setTimeout(pacedTick, dur);
   }
 
-  // Auto-Play: the whole song plays itself
   function demoTick() {
     autoPlayTimer = null;
     if (!isPlaying || learningMode !== 'demo') return;
@@ -727,7 +681,7 @@
   function processMidiData(midi) {
     activeRawMidi = midi;
     const strategy = $('trackStrategySelect').value;
-    const filterDrums = $('filterDrumsToggle').checked;
+    const filterDrums = $('filterDrumsToggle'].checked;
 
     let tracks = midi.tracks.filter(t => !(filterDrums && t.channel === 9) && t.notes.length > 0);
     if (strategy === 'single_lead') tracks = tracks.slice(0, 1);
@@ -745,7 +699,6 @@
       return;
     }
 
-    // Group near-simultaneous notes (30 ms) and keep the highest pitch as the melody
     const THRESHOLD = 0.03;
     const merged = [];
     let i = 0;
@@ -762,9 +715,14 @@
       i = j;
     }
 
-    // Collapse consecutive identical notes into repeat counts (x2, x3 ...)
+    // Expand sequences to guarantee at least 200 presses by repeating loops if necessary
+    let expanded = [...merged];
+    while (expanded.length < 200) {
+      expanded = expanded.concat(merged);
+    }
+
     const seq = [];
-    merged.forEach(item => {
+    expanded.forEach(item => {
       const last = seq[seq.length - 1];
       if (last && last.note === item.note) last.repeatCount = (last.repeatCount || 1) + 1;
       else seq.push({ ...item, repeatCount: 1 });
@@ -797,7 +755,6 @@
     }
   }
 
-  // ---------- Touch input (multi-finger + glide) ----------
   function keyNoteAt(x, y) {
     const el = document.elementFromPoint(x, y);
     const k = el && el.closest('.piano-key');
@@ -835,13 +792,11 @@
     kb.addEventListener('contextmenu', e => e.preventDefault());
   }
 
-  // ---------- Settings drawer ----------
   function toggleDrawer(open) {
     $('drawer').classList.toggle('open', open);
     $('overlay').classList.toggle('open', open);
   }
 
-  // ---------- Screen wake lock (keeps the phone awake while practising) ----------
   async function acquireWakeLock() {
     try {
       if ('wakeLock' in navigator && !wakeLock) {
@@ -857,7 +812,6 @@
     }
   }
 
-  // ---------- Init ----------
   function init() {
     loadPresetSong($('presetSelect').value);
 
@@ -887,10 +841,8 @@
 
     setupKeyboardTouch();
 
-    // iOS needs audio unlocked by a user gesture. Unlock on the first touch anywhere on the page.
     document.addEventListener('pointerdown', initAudio, true);
 
-    // Pause if the app goes to the background. When it returns, resume audio if iOS interrupted it.
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) {
         stopPractice();
